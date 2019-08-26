@@ -1,0 +1,16 @@
+version: '2'
+services:
+  codegeneral-mongodb:
+    image: mongo:4.0.10
+    ports:
+      - '27017:27017'
+    command: mongos --configdb codegeneral-mongodb-config
+  codegeneral-mongodb-node:
+    build:
+      context: .
+      dockerfile: mongodb/MongoDB.Dockerfile
+    command: mongod --replSet rs1 --noprealloc --smallfiles
+  codegeneral-mongodb-config:
+    image: mongo:4.0.10
+    container_name: codegeneral-mongodb-config
+    command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db
