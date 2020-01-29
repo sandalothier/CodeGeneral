@@ -1,0 +1,245 @@
+enum Civilite {
+	MONSIEUR, MADAME, MADEMOISELLE
+}
+enum TypeContribuable {
+	ENTREPRISE, INDIVIDU, ADMINISTRATION_PUBLIQUE, PARTI_POLITIQUE, ONG, ASSOCIATION, DIPLOMATIQUE, ORGANISATION_REGIONALE
+}
+enum ZoneOperation{
+	TERRITOIRE_DOUANIER, ZONE_FRANCHE
+}
+enum NatureActivite {
+	PERMANENTE, SAISONNIERE, OCCASIONNELLE
+}
+enum CategorieActivite {
+	COMMERCE, INDUSTRIE, SERVICE
+}
+enum RegimeImposition {
+	REGIME_NORMAL, REGIME_SIMPLE, REGIME_SYNTHETIQUE, REGIME_FORFAIT
+}
+enum Sexe {
+	FEMININ, MASCULIN
+}
+enum SituationMatrimoniale {
+	MARIE, CELIBATAIRE, DIVORCE, VEUF, CONCUBINAGE
+}
+enum TypeSociete {
+	SOCIETE_DE_PERSONNE, SOCIETE_DE_CAPITAUX
+}
+/**
+ * Qualite entity.
+ * @author sanda
+ *  C'est l'ensemble des postes  au sein d'une administration
+ *  	- PDG
+ *  	- DG etc
+ */
+entity Qualite {
+	sigle String
+	titre String
+}
+/**
+ * Contribuable entity.
+ * @author Sanda
+ *  C'est la table qui contient les informations complémentaire
+ *  de la table User 
+ *  le type de contribuable permettra de faire le trie des champs
+ *  à apparaitre sur le formulaire en fonction du type de 
+ *  contribuable que nous avons
+ *  relationship
+ *  	- OneToOne avec User
+ *  	- ManyToOne avec Region
+ *  	- ManyToOne avec regime
+ *  	- ManyToOne avec FoyerFiscal
+ *  	- ManyToOne avec BrancheActivite
+ *  	- ManyToOne avec Contact
+ *  	- OneToMany avec SecteurEconomique
+ *  	- OneToMany avec Pays
+ *  	- OneToMany avec SecteurEconomique
+ *  	- OneToMany avec Filiation
+ *  	- OneToMany avec Qualite
+ */
+entity Contribuable {
+	typeContribuable TypeContribuable
+	typeSociete TypeSociete
+	zone ZoneOperation
+	natureActivite NatureActivite
+	categorieActivite CategorieActivite
+	civilite Civilite
+	sitMatri SituationMatrimoniale
+	sexe Sexe
+	dateNaissance Date required
+	lieuNaissance String required
+	dateActeConstitutif Date
+	acteCistitutif String
+	nif String
+	codeQr String
+	sigle String
+	coe String
+	codeImport String
+	rccm String
+	signature String
+	secteur SecteurEconomique
+	codeEmployeur String
+	regimeImposition RegimeImposition
+	secteurSup SecteurEconomique
+}
+/**
+ * Personnel entity.
+ * @author Sanda
+ *  c'est l'ensemble des employés que le contribuable remunere à la fin de chaque mois
+ *  relationship
+ *  	- ManyToOne avec Contribuable
+ */
+entity Personnel {
+	dateEmbauche Date 
+	numeroMatricule String
+}
+/**
+ * Employeur entity.
+ * @author Sanda
+ *  c'est l'ensemble des employés que le contribuable remunere à la fin de chaque mois
+ *  relationship
+ *  	- ManyToOne avec Contribuable
+ */
+entity Employeur {
+	debutContrat Date 
+	nomSOciete String
+}
+/**
+ * FormeJuridique entity.
+ * @author Sanda
+ *  c'est l'ensemble des formes juridiques qui peuvent
+ *  exister
+ *  	- société anomyme SA
+ *  	- Société en Non Commandite
+ *  relationship
+ *  	- ManyToOne avec Contribuable
+ */
+entity FormeJuridique {
+	sigle String
+	formeJuridique String
+}
+/**
+ * CapitalInitial entity.
+ * @author Sanda
+ *  C'est les ressources initiales dont dispose une entreprise à son début
+ *  
+ */
+entity CapitalInitial {
+	montantCapital Double
+	partCapital Double
+	nombreTitre Integer
+}
+/**
+ * ComposantCapital entity.
+ * @author Sanda
+ *  C'est les ressources initiales dont dispose une entreprise à son début
+ *  
+ */
+entity ComposantCapital {
+	nombreTitre Integer
+	typeTitre TypeTitre
+}
+/**
+ * Filiation entity.
+ * @author sanda
+ *  Se sont les succursales et pour 
+ *  l'administration publique se sont les ramifications depuis le pouvoir
+ *  auquel il est rattaché
+ */
+entity Succursale{
+	nomSuccursale String
+}
+/**
+ * CompteFiscal entity.
+ * @author sanda
+ *  C'est le gateway de l'application. Il permet de prendre connaissance
+ *  de tout ce qui est fait pour le compte d'un contribuable. Ce compte lui permettra de tout faire à partir de ce dernier à savoir:
+ * 	- faire des déclarations
+ *  	- d'envoyer des courriers
+ *  	- de recevoir les notifications
+ *  	- Vérifier les paiements etc..
+ */
+entity CompteFiscal{
+	refCompte String
+}
+/**
+ * BrancheActivite entity.
+ * @author sanda
+ *   C'est l'ensemble des secteurs d'activité comme à
+ *   l'image des états financiers
+ *   relation
+ *   	- OneToMany avec Contribuable
+ */
+entity BrancheActivite {
+	secteur String
+}
+enum SecteurEconomique {
+	PRIVE, PUBLIC, PARAPUBLIQUE
+}
+relationship OneToMany {
+	Contribuable to Qualite
+}
+relationship OneToMany {
+	Contribuable to CapitalInitial
+}
+relationship OneToMany {
+	CapitalInitial to ComposantCapital
+}
+relationship OneToMany {
+	Contribuable to Personnel
+}relationship OneToMany {
+	Contribuable to Filiation
+}
+relationship OneToMany {
+	Contribuable to BrancheActivite
+}
+/**
+ * One to one relationship.
+ * Ce sont les employeurs de la société
+ */
+relationship OneToMany {
+	Contribuable to Employeur
+}
+relationship OneToMany {
+	BrancheActivite to BrancheActivite
+}
+relationship OneToMany {
+	Contribuable to Succursale
+}
+relationship OneToOne {
+	Succursale to Contact
+}
+relationship OneToOne {
+	Contribuable to CompteFiscal
+}
+relationship OneToOne {
+	Contribuable to FormeJuridique
+}
+relationship OneToOne {
+	Contribuable to CapitalInitial
+}
+/**
+ * One to one relationship.
+ * C'est le siège de l'entreprise
+ */
+relationship OneToOne {
+	Contribuable to Immeuble
+}
+/**
+ * One to one relationship.
+ * C'est le siège de l'entreprise
+ */
+relationship OneToOne {
+	Succursale to Immeuble
+}
+relationship OneToOne {
+	Contribuable to Contact
+}
+// Set pagination options
+paginate Blog, BoitePostale,Email, Fixe, Gsm, Fax, ReseauxSociaux, SiteWeb, Contact with infinite-scroll
+// Use Data Transfert Objects (DTO)
+dto Blog, BoitePostale, Email, Fixe, Gsm, Fax, ReseauxSociaux, SiteWeb with mapstruct
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+// angularSuffix * with mySuffix
