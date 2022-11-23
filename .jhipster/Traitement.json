@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053119",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "traitement",
+  "fields": [
+    {
+      "fieldName": "refTraitement",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "typeTraitement",
+      "fieldType": "TypeTraitement",
+      "fieldValues": "AVANCE,OPPOSITION,DEPOT"
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Traitement entity.\\n@author sanda\\nCe sont les sommmes que le Agent prend auprès de l'administration\\n",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Traitement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "dateOperation",
+      "otherEntityRelationshipName": "refTraitement",
+      "relationshipName": "dateOperation",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

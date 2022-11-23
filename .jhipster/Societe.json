@@ -1,0 +1,64 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053103",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "societe",
+  "fields": [
+    {
+      "fieldName": "intSociete",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "sigle",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "siege",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Societe entity.\\n@author sanda",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Societe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "personnel",
+      "otherEntityRelationshipName": "societe",
+      "relationshipName": "matricule",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "typeDocument",
+      "otherEntityRelationshipName": "societe",
+      "relationshipName": "intTypeDoc",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "succursale",
+      "otherEntityRelationshipName": "societe",
+      "relationshipName": "intSuccursale",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

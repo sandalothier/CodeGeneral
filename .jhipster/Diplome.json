@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053116",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "diplome",
+  "fields": [
+    {
+      "fieldName": "codeDiplome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "intDiplome",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Diplome entity.\\n@author sanda",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Diplome",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

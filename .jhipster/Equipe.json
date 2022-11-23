@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053118",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "equipe",
+  "fields": [
+    {
+      "fieldName": "refEquipe",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Equipe entity.\\n@author sanda\\nCette table est en relation avec celle acteur pour la constitution\\ndes équipes.",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Equipe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "personnel",
+      "otherEntityRelationshipName": "equipe",
+      "relationshipName": "matricule",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

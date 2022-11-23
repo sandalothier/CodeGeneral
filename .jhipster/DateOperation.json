@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053107",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "date_operation",
+  "fields": [
+    {
+      "fieldName": "datoperation",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "DateOperation entity.\\n@author sanda",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "DateOperation",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "permission",
+      "otherEntityRelationshipName": "dateOperation",
+      "relationshipName": "refpermission",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "traitement",
+      "otherEntityRelationshipName": "dateOperation",
+      "relationshipName": "refTraitement",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "periode",
+      "otherEntityRelationshipName": "datoperation",
+      "relationshipName": "periode",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

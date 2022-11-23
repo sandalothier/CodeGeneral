@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053112",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "pointage",
+  "fields": [
+    {
+      "fieldName": "heurArrivee",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "heurDepart",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Pointage entity.\\n@author sanda\\nCette table est en lien avec\\nla table emploi du temps et le calendrier",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Pointage",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "personnel",
+      "otherEntityRelationshipName": "pointage",
+      "relationshipName": "matricule",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}
