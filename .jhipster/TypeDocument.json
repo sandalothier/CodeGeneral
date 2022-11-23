@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053108",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "type_document",
+  "fields": [
+    {
+      "fieldName": "intTypeDoc",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "TypeDocument entity.\\n@author sanda",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "TypeDocument",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "composantDocument",
+      "otherEntityRelationshipName": "typeDocument",
+      "relationshipName": "intComposant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "societe",
+      "otherEntityRelationshipName": "intTypeDoc",
+      "relationshipName": "societe",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

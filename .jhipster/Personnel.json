@@ -1,0 +1,118 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053104",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "personnel",
+  "fields": [
+    {
+      "fieldName": "matricule",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MASCULIN,FEMININ"
+    },
+    {
+      "fieldName": "nomActeur",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "prenomsActeur",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lieuNaissance",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "situationMatrimoniale",
+      "fieldType": "SituationMatrimoniale",
+      "fieldValues": "MARIE,CELIBATAIRE,CONCUBINAGE,VEUF,DIVORCE"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "paysOrigine",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "validite",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Personnel entity.\\n@author sanda\\nCe sont les individus\\nCette table extends la table Acteur",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Personnel",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "diplome",
+      "ownerSide": true,
+      "relationshipName": "codeDiplome",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "adresse",
+      "ownerSide": true,
+      "relationshipName": "cel",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "poste",
+      "ownerSide": true,
+      "relationshipName": "intPoste",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "contratEtablis",
+      "otherEntityRelationshipName": "personnel",
+      "relationshipName": "refContrat",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "societe",
+      "otherEntityRelationshipName": "matricule",
+      "relationshipName": "societe",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "pointage",
+      "otherEntityRelationshipName": "matricule",
+      "relationshipName": "pointage",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "equipe",
+      "otherEntityRelationshipName": "matricule",
+      "relationshipName": "equipe",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

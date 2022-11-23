@@ -1,0 +1,229 @@
+enum Sexe {
+    MASCULIN, 
+    FEMININ
+}
+enum SituationMatrimoniale {
+    MARIE, 
+    CELIBATAIRE, 
+    CONCUBINAGE,
+    VEUF, 
+    DIVORCE
+}
+enum TypeTraitement {
+    AVANCE, 
+    OPPOSITION, 
+    DEPOT
+}
+/**
+ * Societe entity.
+ * @author sanda
+ */
+entity Societe {
+    intSociete String required maxlength(25),
+    sigle String maxlength(25),
+    Logo String required maxlength(25),
+    siege String maxlength(25)
+}
+/**
+ * Personnel entity.
+ * @author sanda
+ * Ce sont les individus
+ * Cette table extends la table Acteur
+ */
+entity Personnel {
+    matricule String maxlength(10),
+    sexe Sexe required,
+    nomActeur String required maxlength(20),
+    prenomsActeur String required maxlength(25),//I
+    dateNaissance LocalDate,//M
+    lieuNaissance String required maxlength(25) //M
+    situationMatrimoniale SituationMatrimoniale,//I
+    photo ImageBlob,
+    paysOrigine String maxlength(25),
+    validite Boolean
+}
+/**
+ * Succursale entity.
+ * @author sanda
+ */
+entity Succursale {
+    intSuccursale String required maxlength(25)
+}
+/**
+ * Periode entity.
+ * @author sanda
+ */
+entity Periode {
+    intPeriode String maxlength(25),
+    debut LocalDate,
+    fin LocalDate
+}
+/**
+ * DateOperation entity.
+ * @author sanda
+ */
+entity DateOperation {
+    datoperation LocalDate
+}
+/**
+ * TypeDocument entity.
+ * @author sanda
+ */
+entity TypeDocument {
+    intTypeDoc String  maxlength(50)
+}
+/**
+ * ComposantDocument entity.
+ * @author sanda
+ */
+entity ComposantDocument {
+    intComposant String required maxlength(25),
+    titreComposant String maxlength(50),
+    contenu String 
+}
+/**
+ * TypeContratDeTravail entity.
+ * @author sanda
+ */
+entity TypeContratDeTravail {
+    intTypeContrat String maxlength(25),
+    Description String required maxlength(50),
+    DureeMax Integer required
+}
+/**
+ * ContratEtablis entity.
+ * @author sanda
+ */
+entity ContratEtablis {
+    refContrat String maxlength(10) required,
+    dateEtablissement LocalDate
+}
+/**
+ * Pointage entity.
+ * @author sanda
+ * Cette table est en lien avec 
+ * la table emploi du temps et le calendrier
+ */
+entity Pointage {
+    heurArrivee LocalDate required,
+    heurDepart LocalDate required
+
+}
+/**
+ * Adresse entity.
+ * @author sanda
+ */
+entity Adresse {
+    cel String maxlength(8),
+    tel String maxlength(8),
+    region String maxlength(25),
+    nomRue String maxlength(25),
+    numRue String maxlength(25)
+}
+/**
+ * Permission entity.
+ * @author sanda
+ * Les motifs pour lesquels l'on prend légalement une permission
+ * - Décès
+ * - Natalité
+ * - Déménagement
+ * - Personnel
+ * Cette table deduit le nombre de jour pris en congé si ceux-ci ne sont pas déductibles
+ * Définir la condition de déductibilité
+ */
+entity Permission {
+    refpermission String maxlength(10) required,
+    intPermission String maxlength(25),
+    motif String maxlength(25) required,
+    deductPerm Integer
+}
+/**
+ * Conge entity.
+ * @author sanda
+ * Cette table est liée aux permissions où ils déduisent ceux qui le sont. 
+ * Elle se constitue suivant des critères bien précis:
+ * - Type de contrat
+ * - Durée dans la fonction
+ * - Déduction 
+ * - Augmentation suivantun cycle
+ */
+entity Conge {
+    refConge String maxlength(10)
+}
+/**
+ * Diplome entity.
+ * @author sanda
+ */
+entity Diplome {
+    codeDiplome String required maxlength(10),
+    intDiplome String maxlength(25)
+}
+/**
+ * Poste entity.
+ * @author sanda
+ */
+entity Poste {
+    intPoste String  maxlength(25)
+}
+/**
+ * Equipe entity.
+ * @author sanda
+ * Cette table est en relation avec celle acteur pour la constitution
+ * des équipes. 
+ */
+entity Equipe {
+    refEquipe String maxlength(10)
+}
+/**
+ * Traitement entity.
+ * @author sanda
+ * Ce sont les sommmes que le Agent prend auprès de l'administration
+ * 
+ */
+entity Traitement {
+    refTraitement String maxlength(10),
+    typeTraitement TypeTraitement,
+    montant Double
+}
+/**
+ * BulletinPaie entity.
+ * @author sanda
+ * C'est le document qui est délivré au Agent justifiant leur dette vis à vis
+ * de l'administration
+ */
+entity BulletinPaie {
+    refBulletin String maxlength(10)
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    Societe{matricule} to Personnel
+    Societe{intTypeDoc} to TypeDocument
+    Societe{intSuccursale} to Succursale
+    TypeDocument{intComposant} to ComposantDocument
+    Personnel{refContrat} to ContratEtablis
+    Periode{datoperation} to DateOperation
+    Periode{refBulletin} to BulletinPaie
+    Periode{refConge} to Conge
+    DateOperation{refpermission} to Permission
+    Pointage{matricule} to Personnel
+    DateOperation{refTraitement} to Traitement
+    Equipe{matricule} to Personnel
+}
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    ContratEtablis{intTypeContrat} to TypeContratDeTravail
+    Personnel{codeDiplome} to Diplome
+    Personnel{cel} to Adresse
+    Personnel{intPoste} to Poste
+    ContratEtablis{intPeriode} to Periode
+}
+paginate all with pagination
+// Use Data Transfert Objects (DTO)
+dto all with mapstruct
+// Set service options to all except few
+service all with serviceImpl
+search all with elasticsearch

@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053120",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "bulletin_paie",
+  "fields": [
+    {
+      "fieldName": "refBulletin",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "BulletinPaie entity.\\n@author sanda\\nC'est le document qui est délivré au Agent justifiant leur dette vis à vis\\nde l'administration",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "BulletinPaie",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "periode",
+      "otherEntityRelationshipName": "refBulletin",
+      "relationshipName": "periode",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

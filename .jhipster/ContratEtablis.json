@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053111",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "contrat_etablis",
+  "fields": [
+    {
+      "fieldName": "refContrat",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "dateEtablissement",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "ContratEtablis entity.\\n@author sanda",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "ContratEtablis",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "typeContratDeTravail",
+      "ownerSide": true,
+      "relationshipName": "intTypeContrat",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "periode",
+      "ownerSide": true,
+      "relationshipName": "intPeriode",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "personnel",
+      "otherEntityRelationshipName": "refContrat",
+      "relationshipName": "personnel",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

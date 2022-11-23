@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053114",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "permission",
+  "fields": [
+    {
+      "fieldName": "refpermission",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "intPermission",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "motif",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "deductPerm",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Permission entity.\\n@author sanda\\nLes motifs pour lesquels l'on prend légalement une permission\\n- Décès\\n- Natalité\\n- Déménagement\\n- Personnel\\nCette table deduit le nombre de jour pris en congé si ceux-ci ne sont pas déductibles\\nDéfinir la condition de déductibilité",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Permission",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "dateOperation",
+      "otherEntityRelationshipName": "refpermission",
+      "relationshipName": "dateOperation",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,54 @@
+{
+  "applications": "*",
+  "changelogDate": "20221123053106",
+  "clientRootFolder": "CodeGeneral",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "periode",
+  "fields": [
+    {
+      "fieldName": "intPeriode",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    },
+    {
+      "fieldName": "debut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "fin",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Periode entity.\\n@author sanda",
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "CodeGeneral",
+  "name": "Periode",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "dateOperation",
+      "otherEntityRelationshipName": "periode",
+      "relationshipName": "datoperation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "bulletinPaie",
+      "otherEntityRelationshipName": "periode",
+      "relationshipName": "refBulletin",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "conge",
+      "otherEntityRelationshipName": "periode",
+      "relationshipName": "refConge",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}
